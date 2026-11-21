@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string translatable="false" name="app_name"><![CDATA[SanTube]]></string>
+
+    <!-- Overrides :leanbackassistant's value, which this build takes from the 'ststable' flavor.
+         Must equal the application id: the search provider is registered under it -->
+    <string translatable="false" name="search_authority">com.santube.tv</string>
+</resources>

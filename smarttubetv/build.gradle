@@ -125,6 +125,10 @@ android {
         variant.outputs.all { output ->
             def project = "SmartTube"
             def flavor = variant.productFlavors[-1].name.substring(2) // remove st prefix
+            if (flavor == "santube") { // SanTube_tv_<version>_<arch>.apk
+                project = "SanTube"
+                flavor = "tv"
+            }
             def buildType = variant.buildType.name.take(1)
             def version = variant.versionName
             def arch = output.getFilter(com.android.build.OutputFile.ABI)
@@ -176,6 +180,17 @@ android {
             ndk {
                 abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86'
             }
+        }
+        // SanTube for TV: own application id, name, icons and default look (src/stsantube).
+        // The library modules have no such flavor, they are taken from 'ststable'.
+        stsantube {
+            applicationId "com.santube.tv"
+            // SanTube's own version line, not upstream's. The release workflow sets both from
+            // the git tag: -PappVersionName=0.1.0 -PappVersionCode=1000
+            versionCode project.hasProperty('appVersionCode') ? project.property('appVersionCode').toInteger() : 1
+            versionName project.hasProperty('appVersionName') ? project.property('appVersionName') : "0.0.0-dev"
+            targetSdkVersion project.properties.compileSdkVersion
+            matchingFallbacks = ['ststable']
         }
     }
 }

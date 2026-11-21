@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- A fresh install starts with the SanTube color scheme: its index in
+         MainUIData.initColorSchemes (the last one) -->
+    <integer name="default_color_scheme_index">8</integer>
+
+    <!-- Overrides :common's 'ststable' value, which points at upstream's update manifest
+         (SmartTube's own releases, another application id). SanTube has no update channel of its
+         own yet, so the in-app update check looks nowhere and never downloads an APK. -->
+    <string-array name="update_urls" />
+</resources>

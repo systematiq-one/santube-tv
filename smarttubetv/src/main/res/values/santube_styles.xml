@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Color of the atom loading spinner (AtomSpinnerDrawable). Themes that don't set it keep
+         the stock spinner -->
+    <attr name="loadingSpinnerColor" format="reference"/>
+
+    <!--  Color scheme: SanTube (MainUIData.initColorSchemes)  -->
+    <style name="App.Theme.SanTube.Player" parent="App.Theme.Leanback.Player">
+        <item name="playbackProgressPrimaryColor">@color/santube_red</item>
+        <item name="playbackProgressSecondaryColor">@color/santube_progress_buffer</item>
+        <item name="playbackControlsIconHighlightColor">@color/santube_accent</item>
+        <item name="cardProgressStyle">@style/ProgressBarHorizontal.SanTube</item>
+        <item name="shelfBackground">@color/santube_surface</item>
+        <item name="cardDefaultBackground">@color/santube_surface_container</item>
+        <item name="cardSelectedBackground">@color/santube_on_surface</item>
+        <item name="android:colorAccent" tools:targetApi="21">@color/santube_accent</item>
+        <item name="loadingSpinnerColor">@color/santube_red</item>
+    </style>
+    <style name="App.Theme.SanTube.Browse" parent="App.Theme.Leanback.Browse">
+        <item name="android:windowBackground">@color/santube_surface</item>
+        <item name="brandColor">@color/santube_surface_container</item>
+        <item name="brandAccentColor">@color/santube_primary</item>
+        <item name="cardProgressStyle">@style/ProgressBarHorizontal.SanTube</item>
+        <item name="shelfBackground">@color/santube_surface</item>
+        <item name="cardDefaultBackground">@color/santube_surface_container</item>
+        <item name="cardSelectedBackground">@color/santube_on_surface</item>
+        <item name="android:colorAccent" tools:targetApi="21">@color/santube_accent</item>
+        <item name="loadingSpinnerColor">@color/santube_red</item>
+    </style>
+    <style name="App.Theme.SanTube.Preferences" parent="App.Theme.Leanback.Preferences">
+        <item name="android:colorPrimary" tools:targetApi="21">@color/santube_surface_container</item>
+        <item name="android:colorAccent" tools:targetApi="21">@color/santube_accent</item>
+        <item name="loadingSpinnerColor">@color/santube_red</item>
+    </style>
+    <style name="ProgressBarHorizontal.SanTube" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_bar_santube</item>
+    </style>
+    <!--  End Color scheme: SanTube  -->
+</resources>

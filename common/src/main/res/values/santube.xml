@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Name of the SanTube color scheme (MainUIData.initColorSchemes). A brand name, not translated -->
+    <string name="color_scheme_santube" translatable="false">SanTube</string>
+
+    <!-- Index in MainUIData.initColorSchemes of the scheme a fresh install starts with.
+         1 is upstream's default (Dark Grey); the SanTube build overrides this with its own scheme -->
+    <integer name="default_color_scheme_index">1</integer>
+</resources>

@@ -421,6 +421,14 @@ public class MainUIData extends DataChangeBase implements ProfileChangeListener 
                 "App.Theme.Leanback.Blue.OLED.Browse",
                 "App.Theme.Leanback.Blue.Preferences",
                 mContext));
+        // Keep last: the stored index of the schemes above must not shift.
+        // R.integer.default_color_scheme_index points here in the SanTube build.
+        mColorSchemes.add(new ColorScheme(
+                R.string.color_scheme_santube,
+                "App.Theme.SanTube.Player",
+                "App.Theme.SanTube.Browse",
+                "App.Theme.SanTube.Preferences",
+                mContext));
     }
 
     private void restoreState() {
@@ -431,7 +439,7 @@ public class MainUIData extends DataChangeBase implements ProfileChangeListener 
         //mIsCardAnimatedPreviewsEnabled = Helpers.parseBoolean(split, 0, true);
         mVideoGridScale = Helpers.parseFloat(split, 1, 1.0f); // 4 cards in a row
         mUIScale = Helpers.parseFloat(split, 2, 1.0f);
-        mColorSchemeIndex = Helpers.parseInt(split, 3, 1);
+        mColorSchemeIndex = Helpers.parseInt(split, 3, mContext.getResources().getInteger(R.integer.default_color_scheme_index));
         mIsCardMultilineTitleEnabled = Helpers.parseBoolean(split, 4, true);
         mChannelCategorySorting = Helpers.parseInt(split, 5, CHANNEL_SORTING_LAST_VIEWED);
         mPlaylistsStyle = Helpers.parseInt(split, 6, PLAYLISTS_STYLE_GRID);

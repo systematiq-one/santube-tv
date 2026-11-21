@@ -1,5 +1,6 @@
 package com.liskovsoft.smartyoutubetv2.tv.ui.mod.leanback.misc;
 
+import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.leanback.app.VerticalGridFragment;
 
 import com.liskovsoft.smartyoutubetv2.common.utils.Utils;
 import com.liskovsoft.smartyoutubetv2.tv.R;
+import com.liskovsoft.smartyoutubetv2.tv.ui.common.AtomSpinnerDrawable;
 
 /**
  * Manager for showing/hiding progress bar widget. This class lets user specify an initial
@@ -65,7 +67,9 @@ public final class ProgressBarManager {
         ProgressBar progressBarView = new ProgressBar(
                 rootView.getContext(), null, android.R.attr.progressBarStyleLarge);
         progressBarView.setIndeterminate(true);
-        progressBarView.setIndeterminateDrawable(
+        // The SanTube color scheme has its own spinner, the other schemes keep the stock one
+        Drawable spinner = AtomSpinnerDrawable.fromTheme(rootView.getContext());
+        progressBarView.setIndeterminateDrawable(spinner != null ? spinner :
                 ContextCompat.getDrawable(rootView.getContext(), R.drawable.progress_large_holo));
 
         FrameLayout.LayoutParams progressBarParams = new FrameLayout.LayoutParams(

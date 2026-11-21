@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SanTube tonal palette: the dark values of the phone app (smarttubedroid values-night/colors_shared.xml),
+     surfaces derived from the brand red. A TV is always dark, so there is no light set. -->
+<resources>
+    <!-- Screen background -->
+    <color name="santube_surface">#FF141213</color>
+    <!-- Sidebar, cards, dialogs -->
+    <color name="santube_surface_container">#FF1F1B1C</color>
+    <color name="santube_surface_container_high">#FF2A2526</color>
+    <!-- Text on the surfaces above. Also the label of the focused card: the lightest thing on
+         screen, readable from across the room -->
+    <color name="santube_on_surface">#FFEFE0DE</color>
+    <color name="santube_on_surface_variant">#FFD4C3C0</color>
+    <color name="santube_outline">#FF4F4445</color>
+    <!-- Toggled-on and selected -->
+    <color name="santube_active_container">#FF9C2B22</color>
+    <!-- The filled red element of a screen (search button) -->
+    <color name="santube_primary">#FFC62828</color>
+    <!-- Accent over the video and on dark surfaces: toggled-on player buttons, switches -->
+    <color name="santube_accent">#FFFF5449</color>
+    <!-- Atom loading spinner and the played part of progress bars -->
+    <color name="santube_red">#FFE00903</color>
+    <!-- Buffered part of the seek bar -->
+    <color name="santube_progress_buffer">#80FFFFFF</color>
+</resources>
