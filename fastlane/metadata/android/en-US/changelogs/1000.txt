@@ -1,0 +1,6 @@
+* First SanTube build for TV, based on SmartTube 32.81. It installs next to SmartTube as its own app
+* SanTube look: dark tonal colors with red accents on the sidebar, cards, dialogs and progress bars, and a red atom loading animation. The other color schemes are still in Settings
+* The captions button turns on the captions in the video's own language (English as a fallback); hold it for the full list
+* A song played on its own continues with YouTube's mix for that song
+* Sign-in no longer fails when the connection drops while you enter the code
+* No in-app updates yet: new versions are published on this page

@@ -1,14 +1,17 @@
 name: Cleanup old workflow runs
 
+# Run it by hand from the Actions tab. The runs it clears only appear when a
+# release is published manually, so there is nothing for a schedule to do on
+# almost every day.
 on:
-  schedule:
-    - cron: '0 3 * * *'
   workflow_dispatch:
 
 jobs:
   cleanup:
     runs-on: ubuntu-latest
-    if: github.event.repository.fork == false
+    # Upstream gates this on the repo not being a fork, so it never deletes history
+    # in anyone's fork. Match on the owner instead, so it only ever runs here.
+    if: github.repository_owner == 'systematiq-one'
     permissions:
       actions: write
     steps:
