@@ -36,6 +36,9 @@ public class VideoLoaderController extends BasePlayerController {
     private SuggestionsController mSuggestionsController;
     private ErrorFixerController mErrorFixerController;
     private Disposable mFormatInfoAction;
+    // Kept for the subtitle track metadata the player's own format list doesn't carry
+    private MediaItemFormatInfo mFormatInfo;
+    private String mFormatInfoVideoId;
     private final Runnable mReloadVideo = () -> {
         getMainController().onNewVideo(getVideo());
     };
@@ -266,6 +269,15 @@ public class VideoLoaderController extends BasePlayerController {
                            });
     }
 
+    /**
+     * The format info of the video that is playing now, null until it's loaded
+     */
+    public MediaItemFormatInfo getFormatInfo() {
+        Video video = getVideo();
+
+        return video != null && Helpers.equals(mFormatInfoVideoId, video.videoId) ? mFormatInfo : null;
+    }
+
     private void processFormatInfo(MediaItemFormatInfo formatInfo) {
         PlaybackView player = getPlayer();
 
@@ -274,6 +286,9 @@ public class VideoLoaderController extends BasePlayerController {
         }
 
         String bgImageUrl = null;
+
+        mFormatInfo = formatInfo;
+        mFormatInfoVideoId = getVideo().videoId;
 
         getVideo().sync(formatInfo);
 

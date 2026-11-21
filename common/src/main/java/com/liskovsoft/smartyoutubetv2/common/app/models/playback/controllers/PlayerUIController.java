@@ -40,6 +40,7 @@ import com.liskovsoft.smartyoutubetv2.common.prefs.PlayerData;
 import com.liskovsoft.smartyoutubetv2.common.prefs.SearchData;
 import com.liskovsoft.smartyoutubetv2.common.utils.AppDialogUtil;
 import com.liskovsoft.smartyoutubetv2.common.utils.Utils;
+import com.liskovsoft.smartyoutubetv2.common.utils.VideoLanguageSubtitles;
 import com.liskovsoft.youtubeapi.service.YouTubeServiceManager;
 import com.liskovsoft.youtubeapi.service.YouTubeSignInService;
 import io.reactivex.Observable;
@@ -154,6 +155,12 @@ public class PlayerUIController extends BasePlayerController {
 
         boolean enabled = buttonState == PlayerUI.BUTTON_ON;
 
+        // A press goes straight to the captions in the video's own language. The long press
+        // still opens the whole track list, and so does a press on a video without such a track.
+        if (toggleVideoLanguageSubtitles(enabled)) {
+            return;
+        }
+
         // First run
         if (FormatItem.SUBTITLE_NONE.equals(getPlayerData().getLastSubtitleFormat())) {
             onSubtitleLongClicked();
@@ -185,6 +192,33 @@ public class PlayerUIController extends BasePlayerController {
             // Match not found
             onSubtitleLongClicked();
         }
+    }
+
+    /**
+     * @return false when there is nothing to pick, the caller then falls back to the last used track
+     */
+    private boolean toggleVideoLanguageSubtitles(boolean enabled) {
+        List<FormatItem> subtitleFormats = getPlayer().getSubtitleFormats();
+
+        // Only default in the list
+        if (subtitleFormats == null || subtitleFormats.size() <= 1) {
+            return false;
+        }
+
+        VideoLoaderController loader = getController(VideoLoaderController.class);
+        FormatItem format = enabled ? FormatItem.SUBTITLE_NONE :
+                VideoLanguageSubtitles.findFormat(loader != null ? loader.getFormatInfo() : null, subtitleFormats);
+
+        if (format == null) {
+            return false;
+        }
+
+        getPlayer().setFormat(format);
+        getPlayerData().setFormat(format);
+        getPlayer().setButtonState(R.id.lb_control_closed_captioning, enabled ? PlayerUI.BUTTON_OFF : PlayerUI.BUTTON_ON);
+        enableSubtitleForChannel(!enabled);
+
+        return true;
     }
 
     private void onSubtitleLongClicked() {
