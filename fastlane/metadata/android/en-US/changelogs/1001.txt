@@ -1,0 +1,2 @@
+* New start intro: the red S fades in over a soft red light while Home loads, instead of the spinner on an empty page
+* App icon and home screen channel logo: the S has the same size and tile as the SanTube phone app
