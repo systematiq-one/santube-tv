@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.liskovsoft.sharedutils.helpers.MessageHelpers;
 import com.liskovsoft.smartyoutubetv2.common.prefs.MainUIData;
 import com.liskovsoft.smartyoutubetv2.tv.R;
+import com.liskovsoft.smartyoutubetv2.tv.ui.common.IntroView;
 import com.liskovsoft.smartyoutubetv2.tv.ui.common.LeanbackActivity;
 
 public class BrowseActivity extends LeanbackActivity {
@@ -18,6 +19,11 @@ public class BrowseActivity extends LeanbackActivity {
         } catch (NoClassDefFoundError e) {
             // Failed resolution of: Landroidx/lifecycle/ViewTreeLifecycleOwner;
             MessageHelpers.showMessage(this, e.getMessage());
+        }
+
+        // SanTube: the start intro while the first section loads (fresh starts, not recreations)
+        if (savedInstanceState == null) {
+            IntroView.show(this);
         }
     }
 

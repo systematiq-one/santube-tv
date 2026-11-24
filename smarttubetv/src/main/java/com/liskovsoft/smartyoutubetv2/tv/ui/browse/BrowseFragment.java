@@ -38,6 +38,7 @@ import com.liskovsoft.smartyoutubetv2.tv.presenter.IconHeaderItemPresenter;
 import com.liskovsoft.smartyoutubetv2.tv.ui.browse.dialog.ErrorDialogFragment;
 import com.liskovsoft.smartyoutubetv2.tv.ui.mod.leanback.headers.ExtendedHeadersSupportFragment;
 import com.liskovsoft.smartyoutubetv2.tv.ui.mod.leanback.misc.ProgressBarManager;
+import com.liskovsoft.smartyoutubetv2.tv.ui.common.IntroView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -250,6 +251,7 @@ public class BrowseFragment extends BrowseSupportFragment implements BrowseView 
     @Override
     public void showError(ErrorFragmentData data) {
         replaceMainFragment(new ErrorDialogFragment(data));
+        IntroView.dismiss(getActivity());
     }
 
     private void showErrorIfEmpty(ErrorFragmentData data) {
@@ -313,6 +315,11 @@ public class BrowseFragment extends BrowseSupportFragment implements BrowseView 
         mSectionFragmentFactory.updateCurrentFragment(group);
 
         fixInvisibleSearchOrb();
+
+        // SanTube: the start intro goes with the first cards (a first update can be empty)
+        if (!isEmpty()) {
+            IntroView.dismiss(getActivity());
+        }
     }
 
     @Override
@@ -320,6 +327,7 @@ public class BrowseFragment extends BrowseSupportFragment implements BrowseView 
         restoreMainFragment();
 
         mSectionFragmentFactory.updateCurrentFragment(group);
+        IntroView.dismiss(getActivity());
     }
 
     @Override

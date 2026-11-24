@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- SanTube's start intro (tv.ui.common.IntroView): off here, on in the stsantube flavor -->
+    <bool name="santube_intro">false</bool>
+    <!-- Its light: the logo red, drawn at 30% -->
+    <color name="intro_glow">#FFFF0033</color>
+</resources>

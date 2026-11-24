@@ -4,6 +4,9 @@
          MainUIData.initColorSchemes (the last one) -->
     <integer name="default_color_scheme_index">8</integer>
 
+    <!-- The start intro: the S over the red light while the first section loads -->
+    <bool name="santube_intro">true</bool>
+
     <!-- Overrides :common's 'ststable' value, which points at upstream's update manifest
          (SmartTube's own releases, another application id). SanTube has no update channel of its
          own yet, so the in-app update check looks nowhere and never downloads an APK. -->
