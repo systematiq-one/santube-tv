@@ -82,7 +82,11 @@ public static class SanAssets {
 }
 '@
 
+# The same rule as every SanTube / Saneafy icon: dark tonal tile, #2A2526 at the top to #141213
+# at the bottom, corners 20% of the tile, the S 66% of the tile wide, centred
 $surface = [System.Drawing.ColorTranslator]::FromHtml('#141213')
+$surfaceTop = [System.Drawing.ColorTranslator]::FromHtml('#2A2526')
+$sFraction = 0.66
 $onSurface = [System.Drawing.ColorTranslator]::FromHtml('#EFE0DE')
 
 $logo = New-Object System.Drawing.Bitmap $LogoPath
@@ -91,27 +95,36 @@ $src = [SanAssets]::Bounds($logo)
 
 New-Item -ItemType Directory -Force "$Res\mipmap-nodpi", "$Res\drawable" | Out-Null
 
+function New-TileBrush([float]$size) {
+    New-Object System.Drawing.Drawing2D.LinearGradientBrush (New-Object System.Drawing.PointF 0, -1), (New-Object System.Drawing.PointF 0, ($size + 1)), $surfaceTop, $surface
+}
+
+# Square box of the S: $sFraction of the tile, centred
+function Get-SBox([float]$size) {
+    $s = $size * $sFraction
+    New-Object System.Drawing.RectangleF (($size - $s) / 2), (($size - $s) / 2), $s, $s
+}
+
 function Save-Png($bmp, $path) {
     $bmp.Save($path, [System.Drawing.Imaging.ImageFormat]::Png)
     $bmp.Dispose()
     "{0,7} bytes  {1}" -f (Get-Item $path).Length, $path
 }
 
-# --- app_icon.png: 320x320, dark rounded square with the S (same idea as the phone icon)
+# --- app_icon.png: 320x320, the rounded tile with the S (the phone icon's tile)
 $bmp = New-Object System.Drawing.Bitmap 320, 320, ([System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
 $g = [SanAssets]::Canvas($bmp)
-$path = [SanAssets]::RoundRect((New-Object System.Drawing.RectangleF 0, 0, 320, 320), 68)
-$brush = New-Object System.Drawing.SolidBrush $surface
-$g.FillPath($brush, $path)
-[SanAssets]::DrawLogo($g, $logo, $src, (New-Object System.Drawing.RectangleF 62, 62, 196, 196), $null)
+$path = [SanAssets]::RoundRect((New-Object System.Drawing.RectangleF 0, 0, 320, 320), 64)
+$g.FillPath((New-TileBrush 320), $path)
+[SanAssets]::DrawLogo($g, $logo, $src, (Get-SBox 320), $null)
 $g.Dispose()
 Save-Png $bmp "$Res\mipmap-nodpi\app_icon.png"
 
 # --- generic_channels.png: 300x300, full-bleed square (logo of the home screen channels)
 $bmp = New-Object System.Drawing.Bitmap 300, 300, ([System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
 $g = [SanAssets]::Canvas($bmp)
-$g.Clear($surface)
-[SanAssets]::DrawLogo($g, $logo, $src, (New-Object System.Drawing.RectangleF 62, 62, 176, 176), $null)
+$g.FillRectangle((New-TileBrush 300), 0, 0, 300, 300)
+[SanAssets]::DrawLogo($g, $logo, $src, (Get-SBox 300), $null)
 $g.Dispose()
 Save-Png $bmp "$Res\drawable\generic_channels.png"
 
